@@ -1,0 +1,14 @@
+.node {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #AEB2C4;
+}
+
+.node-start{
+    background-color: seagreen;
+}
+
+.node-end{
+    background-color: darkred;
+}
+
