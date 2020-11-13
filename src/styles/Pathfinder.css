@@ -2,7 +2,57 @@
     display: flex;
 }
 
+.legend {
+    float: left;
+    margin-top: 250px;
+    margin-left: 100px;
+    display:table;
+}
+
+.legend-node {
+    width: 25px;
+    height: 25px;
+}
+
+.float-container {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.float {
+    border: none;
+}
+
+.float:first-child {
+    margin-right: 20px;
+} 
+
+.gridWrapper{
+    margin-top: 20px;
+}
+
 .wrapper {
-    max-width: 80%;
     margin: auto;
+    width: 50%;
+    padding: 10px;
+    max-width: 80%;
+}
+
+.button {
+    background-color: rgb(229, 9, 20);
+    width: 84px;
+    height: fit-content;
+    color: white;
+    border: 0px;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 8px 17px;
+    cursor: pointer;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin-right: 10px;
+}
+
+.button-algo {
+    background-color: #AAC2C5;
 }

@@ -10,6 +10,7 @@ function Astar(startNode, endNode)
     var openSet = []; //this contains all the Nodes/Spot we still have to visit
     var closedSet = []; //this contains the Nodes that we have already visited
     let path = []; //this will contain the shortest path to our end node
+    let visitedNodes = [] //this contains all the visited node for animation purposes
 
     openSet.push(startNode) //our starting point we push this immediately
 
@@ -25,29 +26,32 @@ function Astar(startNode, endNode)
         }
 
         let current = openSet[leastIndex]; //this is the current lowest f node that we found
-
+        visitedNodes.push(current)
         if(current === endNode) // we have found the endNode and path
         {
-            console.log("Path Found!")
+            let temp = current; //starting back from the endNode basically
+            path.push(temp)
+            while(temp.previous)
+            {
+                path.push(temp.previous)
+                temp = temp.previous
+            }
+
+            return { path, visitedNodes };
         }
 
         openSet = openSet.filter(elt => elt !== current) //this removes the current from the openSet (we have one less node to check) there is no remove function unfortunately
         closedSet.push(current) //adding then the current to the closedSet which was removed from openSet
 
-        console.log(current) //DEBUGGING
-
         let neighbours = current.neighbours; //we need to check all the 4 neighbours nodes of the current node
-        console.log(neighbours) //DEBUGGING
         for(let i = 0; i < neighbours.length; i++)
         {
             let neighbour = neighbours[i]; //exctracting each of the 4 neighbour from the different array index
-            console.log(neighbour) //RETURNS UNDEFINED
-            if(!closedSet.includes(neighbour)) //if closedSet does not include the neighbour
+            if(!closedSet.includes(neighbour) && !neighbour.isWall) //if closedSet does not include the neighbour and is not a wall
             {
 
                 let tempG = current.g + 1 //temporary G value
                 let newPath = false;
-
                 if(openSet.includes(neighbour))//if openSet includes that neighbour
                 {
                     if(tempG < neighbour.g) //if the tempG (current.g +1) is lower than the neighbour g value
@@ -71,6 +75,8 @@ function Astar(startNode, endNode)
             }
         }
     }
+    
+    return { path, visitedNodes, error: "No Path found!"}
 }
 
 
